@@ -5,7 +5,7 @@ import Rows from '../components/Rows.astro';
 import ArticleList from '../components/ArticleList.astro';
 import Newsletter from '../components/Newsletter.astro';
 import CtaBand from '../components/CtaBand.astro';
-import Img from '../components/Img.astro';
+import Art from '../components/Art.astro';
 import { site } from '../data/site';
 import { articlesById } from '../lib/articles';
 
@@ -94,13 +94,9 @@ const types = [
     </div>
   </section>
 
-  <figure class="skyline">
-    <Img name="reno-autumn-skyline-trevor-bexon.jpg" alt="Reno skyline and surrounding hills in autumn" sizes="100vw" class="skyline-img" />
-    <figcaption class="wrap meta">
-      Photo: <a href="https://commons.wikimedia.org/wiki/File:City_of_Reno_in_Autumn.jpg">City of Reno in Autumn</a> by Trevor Bexon,
-      <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>. Resized.
-    </figcaption>
-  </figure>
+  <div class="skyline">
+    <Art name="panorama" />
+  </div>
 
   <section class="band band--granite">
     <div class="wrap guides">
@@ -137,10 +133,7 @@ const types = [
   .compare { margin: 2.5rem 0 0; }
   .compare a { font-family: var(--sans); font-weight: 700; margin-left: 0.25rem; }
 
-  .skyline { margin: 0; }
-  .skyline :global(.skyline-img), .skyline :global(.skyline-img img) { width: 100%; height: clamp(200px, 28vw, 420px); object-fit: cover; border-radius: 0; aspect-ratio: auto; }
-  .skyline figcaption { padding-block: 0.6rem; }
-  .skyline figcaption a { color: var(--ink-soft); }
+  .skyline :global(.art) { border-radius: 0; height: clamp(180px, 22vw, 320px); width: 100%; }
 
   .guides { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 3rem; }
   .guides-head p { color: var(--ink-soft); }

@@ -1,0 +1,41 @@
+---
+const { label = 'Illustration of a flex industrial building with a glass office corner and grade-level roll-up doors.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <rect class="bg" width="600" height="480" />
+  <path class="ridge-far" d="M0,268 L48,236 L96,252 L150,206 L206,238 L262,196 L318,228 L372,204 L430,240 L488,212 L548,236 L600,222 L600,400 L0,400 Z" />
+  <path class="ridge" d="M0,300 L58,272 L118,290 L176,258 L236,282 L300,250 L352,276 L414,256 L478,286 L536,266 L600,288 L600,400 L0,400 Z" />
+  <rect class="ground" y="400" width="600" height="80" />
+  <!-- warehouse body (tilt-up panels) -->
+  <rect class="bld" x="40" y="238" width="510" height="162" />
+  <g class="thin">
+    <line x1="210" y1="238" x2="210" y2="400" /><line x1="290" y1="238" x2="290" y2="400" /><line x1="370" y1="238" x2="370" y2="400" /><line x1="450" y1="238" x2="450" y2="400" />
+  </g>
+  <line class="thin" x1="40" y1="252" x2="550" y2="252" />
+  <!-- office corner -->
+  <rect class="bld" x="40" y="214" width="150" height="186" />
+  <rect class="glass" x="52" y="228" width="126" height="76" />
+  <rect class="glass" x="52" y="314" width="126" height="86" />
+  <g class="thin"><line x1="94" y1="228" x2="94" y2="304" /><line x1="136" y1="228" x2="136" y2="304" /><line x1="94" y1="314" x2="94" y2="400" /><line x1="136" y1="314" x2="136" y2="400" /></g>
+  <rect class="fill-green" x="40" y="206" width="150" height="10" />
+  <!-- roll-up doors -->
+  <g>
+    <rect class="bld-alt" x="222" y="306" width="56" height="94" />
+    <rect class="fill-green" x="302" y="306" width="56" height="94" />
+    <rect class="bld-alt" x="382" y="306" width="56" height="94" />
+    <rect class="bld-alt" x="462" y="306" width="56" height="94" />
+    <g class="thin">
+      <line x1="222" y1="320" x2="278" y2="320" /><line x1="222" y1="334" x2="278" y2="334" /><line x1="222" y1="348" x2="278" y2="348" /><line x1="222" y1="362" x2="278" y2="362" /><line x1="222" y1="376" x2="278" y2="376" /><line x1="222" y1="390" x2="278" y2="390" />
+      <line x1="382" y1="320" x2="438" y2="320" /><line x1="382" y1="334" x2="438" y2="334" /><line x1="382" y1="348" x2="438" y2="348" /><line x1="382" y1="362" x2="438" y2="362" /><line x1="382" y1="376" x2="438" y2="376" /><line x1="382" y1="390" x2="438" y2="390" />
+      <line x1="462" y1="320" x2="518" y2="320" /><line x1="462" y1="334" x2="518" y2="334" /><line x1="462" y1="348" x2="518" y2="348" /><line x1="462" y1="362" x2="518" y2="362" /><line x1="462" y1="376" x2="518" y2="376" /><line x1="462" y1="390" x2="518" y2="390" />
+    </g>
+    <g style="stroke:#fff;stroke-width:1.5"><line x1="302" y1="320" x2="358" y2="320" /><line x1="302" y1="334" x2="358" y2="334" /><line x1="302" y1="348" x2="358" y2="348" /><line x1="302" y1="362" x2="358" y2="362" /><line x1="302" y1="376" x2="358" y2="376" /><line x1="302" y1="390" x2="358" y2="390" /></g>
+  </g>
+  <!-- clear height dimension -->
+  <line class="dim" x1="572" y1="238" x2="572" y2="400" />
+  <line class="dim" x1="564" y1="238" x2="580" y2="238" /><line class="dim" x1="564" y1="400" x2="580" y2="400" />
+  <text class="label" x="590" y="319" text-anchor="middle" transform="rotate(-90 590 319)">clear height</text>
+  <!-- apron -->
+  <line class="stripe" x1="210" y1="440" x2="560" y2="440" />
+  <line class="trunk" x1="20" y1="400" x2="20" y2="364" /><circle class="tree" cx="20" cy="350" r="18" />
+</svg>

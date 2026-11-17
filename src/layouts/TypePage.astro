@@ -11,11 +11,11 @@ import { site } from '../data/site';
 interface Props {
   seoTitle: string; description: string;
   title: string; lede: string; primary?: { label: string; href: string };
-  image: string; alt: string; caption?: string;
+  art: import('../components/Art.astro').ArtName;
   checks: { h: string; text: string }[];
   business: string; owner: string;
   checklist: { label: string; href: string };
-  credit: string;
+  credit?: string;
 }
 const p = Astro.props;
 ---
@@ -27,9 +27,7 @@ const p = Astro.props;
       p.primary ?? { label: 'Talk through your requirements', href: site.phoneHref },
       { label: 'See what to check', href: '#property-checks', quiet: true },
     ]}
-    image={p.image}
-    alt={p.alt}
-    caption={p.caption}
+    art={p.art}
   />
 
   <section id="property-checks" class="band band--granite">

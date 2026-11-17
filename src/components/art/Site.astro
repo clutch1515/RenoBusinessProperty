@@ -1,0 +1,35 @@
+---
+const { label = 'Illustration of a commercial site plan showing the property line, building footprint, parking stalls, landscaping, and street access.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <rect class="bg" width="600" height="480" />
+  <!-- street -->
+  <rect class="ground" x="0" y="392" width="600" height="88" />
+  <line class="stripe" x1="0" y1="436" x2="600" y2="436" style="stroke-dasharray:24 16" />
+  <!-- parcel -->
+  <path class="paper" d="M60,40 L540,40 L540,380 L60,380 Z" />
+  <path class="dash" d="M60,40 L540,40 L540,380 L60,380 Z" />
+  <!-- building footprint -->
+  <rect class="fill-green" x="300" y="70" width="210" height="140" />
+  <rect x="300" y="70" width="210" height="140" class="ink" />
+  <line style="stroke:#fff;stroke-width:1.5" x1="405" y1="70" x2="405" y2="210" />
+  <!-- parking field -->
+  <g class="thin">
+    <line x1="90" y1="70" x2="270" y2="70" />
+    <line x1="90" y1="70" x2="90" y2="120" /><line x1="120" y1="70" x2="120" y2="120" /><line x1="150" y1="70" x2="150" y2="120" /><line x1="180" y1="70" x2="180" y2="120" /><line x1="210" y1="70" x2="210" y2="120" /><line x1="240" y1="70" x2="240" y2="120" /><line x1="270" y1="70" x2="270" y2="120" />
+    <line x1="90" y1="190" x2="90" y2="240" /><line x1="120" y1="190" x2="120" y2="240" /><line x1="150" y1="190" x2="150" y2="240" /><line x1="180" y1="190" x2="180" y2="240" /><line x1="210" y1="190" x2="210" y2="240" /><line x1="240" y1="190" x2="240" y2="240" /><line x1="270" y1="190" x2="270" y2="240" />
+    <line x1="90" y1="240" x2="270" y2="240" />
+    <line x1="300" y1="250" x2="300" y2="300" /><line x1="330" y1="250" x2="330" y2="300" /><line x1="360" y1="250" x2="360" y2="300" /><line x1="390" y1="250" x2="390" y2="300" /><line x1="420" y1="250" x2="420" y2="300" /><line x1="450" y1="250" x2="450" y2="300" /><line x1="480" y1="250" x2="480" y2="300" /><line x1="510" y1="250" x2="510" y2="300" />
+  </g>
+  <!-- drive aisle arrows -->
+  <path class="dim" d="M150,155 L210,155 M200,149 L210,155 L200,161" />
+  <!-- landscaping -->
+  <g class="tree"><circle cx="90" cy="300" r="16" /><circle cx="130" cy="330" r="12" /><circle cx="250" cy="320" r="14" /><circle cx="520" cy="340" r="14" /><circle cx="480" cy="352" r="10" /></g>
+  <!-- driveways -->
+  <rect class="ground" x="170" y="380" width="60" height="12" /><rect class="ground" x="380" y="380" width="60" height="12" />
+  <line class="dash" x1="170" y1="380" x2="230" y2="380" style="stroke:var(--granite)" />
+  <!-- dimension -->
+  <line class="dim" x1="60" y1="22" x2="540" y2="22" /><line class="dim" x1="60" y1="14" x2="60" y2="30" /><line class="dim" x1="540" y1="14" x2="540" y2="30" />
+  <line class="dim" x1="560" y1="40" x2="560" y2="380" /><line class="dim" x1="552" y1="40" x2="568" y2="40" /><line class="dim" x1="552" y1="380" x2="568" y2="380" />
+  <text class="label" x="300" y="372" text-anchor="middle">property line</text>
+</svg>

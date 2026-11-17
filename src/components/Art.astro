@@ -1,0 +1,17 @@
+---
+// Picks one of the site's original illustrations by name.
+import Retail from './art/Retail.astro';
+import Flex from './art/Flex.astro';
+import Office from './art/Office.astro';
+import Owners from './art/Owners.astro';
+import Plan from './art/Plan.astro';
+import Site from './art/Site.astro';
+import Skyline from './art/Skyline.astro';
+import Valley from './art/Valley.astro';
+import Panorama from './art/Panorama.astro';
+const map = { retail: Retail, flex: Flex, office: Office, owners: Owners, plan: Plan, site: Site, skyline: Skyline, valley: Valley, panorama: Panorama };
+export type ArtName = keyof typeof map;
+interface Props { name: ArtName }
+const C = map[Astro.props.name];
+---
+<C />

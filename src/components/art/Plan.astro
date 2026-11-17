@@ -1,0 +1,39 @@
+---
+const { label = 'Illustration of a commercial suite floor plan with private offices, a conference room, an open work area, and an entry.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <rect class="bg" width="600" height="480" />
+  <rect class="paper" x="40" y="40" width="520" height="400" rx="2" />
+  <!-- dimension lines -->
+  <line class="dim" x1="80" y1="62" x2="520" y2="62" /><line class="dim" x1="80" y1="54" x2="80" y2="70" /><line class="dim" x1="520" y1="54" x2="520" y2="70" />
+  <line class="dim" x1="60" y1="84" x2="60" y2="414" /><line class="dim" x1="52" y1="84" x2="68" y2="84" /><line class="dim" x1="52" y1="414" x2="68" y2="414" />
+  <!-- highlighted room -->
+  <rect class="fill-tint" x="380" y="84" width="140" height="150" />
+  <!-- exterior walls (entry gap at bottom) -->
+  <path class="wall" d="M270,414 L80,414 L80,84 L520,84 L520,414 L330,414" />
+  <!-- interior walls -->
+  <path class="wall" style="stroke-width:4" d="M80,190 L150,190 M180,190 L230,190 M260,190 L290,190 M190,84 L190,190 M290,84 L290,190" />
+  <path class="wall" style="stroke-width:4" d="M380,84 L380,140 M380,180 L380,234 L520,234" />
+  <path class="wall" style="stroke-width:4" d="M440,330 L440,414 M440,330 L470,330 M500,330 L520,330" />
+  <!-- door swings -->
+  <path class="thin" d="M150,190 A30,30 0 0 1 180,220" /><line class="thin" x1="150" y1="190" x2="150" y2="220" />
+  <path class="thin" d="M230,190 A30,30 0 0 1 260,220" /><line class="thin" x1="230" y1="190" x2="230" y2="220" />
+  <path class="thin" d="M380,140 A40,40 0 0 0 340,180" /><line class="thin" x1="380" y1="180" x2="340" y2="180" />
+  <path class="thin" d="M470,330 A30,30 0 0 1 500,360" /><line class="thin" x1="470" y1="330" x2="470" y2="360" />
+  <!-- conference table -->
+  <rect class="bld" x="410" y="130" width="80" height="50" rx="24" style="stroke-width:2" />
+  <g class="thin"><circle cx="425" cy="120" r="6" /><circle cx="450" cy="120" r="6" /><circle cx="475" cy="120" r="6" /><circle cx="425" cy="190" r="6" /><circle cx="450" cy="190" r="6" /><circle cx="475" cy="190" r="6" /></g>
+  <!-- private office desks -->
+  <rect class="thin" x="110" y="110" width="56" height="26" /><rect class="thin" x="210" y="110" width="56" height="26" />
+  <!-- open work area desks -->
+  <g class="thin">
+    <rect x="110" y="250" width="70" height="34" /><rect x="190" y="250" width="70" height="34" /><rect x="270" y="250" width="70" height="34" />
+    <rect x="110" y="320" width="70" height="34" /><rect x="190" y="320" width="70" height="34" /><rect x="270" y="320" width="70" height="34" />
+  </g>
+  <!-- restroom fixtures -->
+  <g class="thin"><rect x="456" y="380" width="22" height="26" rx="8" /><rect x="490" y="380" width="22" height="26" rx="8" /></g>
+  <!-- entry -->
+  <path class="fill-green" d="M300,452 L284,430 L294,430 L294,418 L306,418 L306,430 L316,430 Z" />
+  <!-- north arrow -->
+  <path class="fill-ink" d="M540,456 L534,470 L540,466 L546,470 Z" />
+</svg>

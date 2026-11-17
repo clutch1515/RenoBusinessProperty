@@ -1,0 +1,34 @@
+---
+const { label = 'Illustration of a three-story office building with a glass curtain wall, entry canopy, and parking.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <rect class="bg" width="600" height="480" />
+  <path class="ridge-far" d="M0,268 L48,236 L96,252 L150,206 L206,238 L262,196 L318,228 L372,204 L430,240 L488,212 L548,236 L600,222 L600,400 L0,400 Z" />
+  <path class="ridge" d="M0,300 L58,272 L118,290 L176,258 L236,282 L300,250 L352,276 L414,256 L478,286 L536,266 L600,288 L600,400 L0,400 Z" />
+  <rect class="ground" y="400" width="600" height="80" />
+  <!-- building -->
+  <rect class="bld" x="130" y="150" width="340" height="250" />
+  <rect class="bld" x="122" y="140" width="356" height="14" />
+  <!-- floors: glass bands with spandrels -->
+  <rect class="glass" x="146" y="168" width="308" height="58" />
+  <rect class="glass" x="146" y="244" width="308" height="58" />
+  <rect class="glass" x="146" y="320" width="308" height="80" />
+  <g class="thin">
+    <line x1="190" y1="168" x2="190" y2="226" /><line x1="234" y1="168" x2="234" y2="226" /><line x1="278" y1="168" x2="278" y2="226" /><line x1="322" y1="168" x2="322" y2="226" /><line x1="366" y1="168" x2="366" y2="226" /><line x1="410" y1="168" x2="410" y2="226" />
+    <line x1="190" y1="244" x2="190" y2="302" /><line x1="234" y1="244" x2="234" y2="302" /><line x1="278" y1="244" x2="278" y2="302" /><line x1="322" y1="244" x2="322" y2="302" /><line x1="366" y1="244" x2="366" y2="302" /><line x1="410" y1="244" x2="410" y2="302" />
+    <line x1="190" y1="320" x2="190" y2="400" /><line x1="234" y1="320" x2="234" y2="400" /><line x1="366" y1="320" x2="366" y2="400" /><line x1="410" y1="320" x2="410" y2="400" />
+  </g>
+  <!-- entry -->
+  <rect class="fill-green" x="252" y="334" width="96" height="10" />
+  <line class="ink" x1="278" y1="344" x2="278" y2="400" /><line class="ink" x1="322" y1="344" x2="322" y2="400" /><line class="thin" x1="300" y1="350" x2="300" y2="400" />
+  <!-- trees -->
+  <line class="trunk" x1="88" y1="400" x2="88" y2="350" /><circle class="tree" cx="88" cy="332" r="26" />
+  <line class="trunk" x1="512" y1="400" x2="512" y2="356" /><circle class="tree" cx="512" cy="340" r="22" />
+  <line class="trunk" x1="40" y1="400" x2="40" y2="368" /><circle class="tree" cx="40" cy="356" r="16" />
+  <!-- parking -->
+  <g>
+    <line class="stripe" x1="40" y1="476" x2="40" y2="420" /><line class="stripe" x1="110" y1="476" x2="110" y2="420" /><line class="stripe" x1="180" y1="476" x2="180" y2="420" />
+    <line class="stripe" x1="420" y1="476" x2="420" y2="420" /><line class="stripe" x1="490" y1="476" x2="490" y2="420" /><line class="stripe" x1="560" y1="476" x2="560" y2="420" />
+  </g>
+  <path class="stripe" d="M260,420 L300,404 L340,420" style="stroke-width:2" />
+</svg>

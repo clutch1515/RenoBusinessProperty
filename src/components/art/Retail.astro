@@ -1,0 +1,46 @@
+---
+const { label = 'Illustration of a retail strip center with storefronts, awnings, a monument sign, and parking.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <rect class="bg" width="600" height="480" />
+  <path class="ridge-far" d="M0,268 L48,236 L96,252 L150,206 L206,238 L262,196 L318,228 L372,204 L430,240 L488,212 L548,236 L600,222 L600,400 L0,400 Z" />
+  <path class="ridge" d="M0,300 L58,272 L118,290 L176,258 L236,282 L300,250 L352,276 L414,256 L478,286 L536,266 L600,288 L600,400 L0,400 Z" />
+  <rect class="ground" y="400" width="600" height="80" />
+  <!-- trees behind -->
+  <line class="trunk" x1="572" y1="400" x2="572" y2="352" /><circle class="tree" cx="572" cy="336" r="24" />
+  <line class="trunk" x1="30" y1="400" x2="30" y2="360" /><circle class="tree" cx="30" cy="346" r="20" />
+  <!-- building -->
+  <rect class="bld" x="250" y="200" width="110" height="60" />
+  <rect class="bld" x="56" y="238" width="488" height="162" />
+  <line class="ink" x1="56" y1="282" x2="544" y2="282" />
+  <line class="thin" x1="56" y1="246" x2="544" y2="246" />
+  <!-- bays -->
+  <g>
+    <rect class="glass" x="68" y="300" width="98" height="100" /><line class="thin" x1="68" y1="324" x2="166" y2="324" /><line class="thin" x1="117" y1="324" x2="117" y2="400" />
+    <rect class="glass" x="190" y="300" width="98" height="100" /><line class="thin" x1="190" y1="324" x2="288" y2="324" /><line class="thin" x1="239" y1="324" x2="239" y2="400" />
+    <rect class="glass" x="312" y="300" width="98" height="100" /><line class="thin" x1="312" y1="324" x2="410" y2="324" /><line class="thin" x1="361" y1="324" x2="361" y2="400" />
+    <rect class="glass" x="434" y="300" width="98" height="100" /><line class="thin" x1="434" y1="324" x2="532" y2="324" /><line class="thin" x1="483" y1="324" x2="483" y2="400" />
+  </g>
+  <!-- pilasters -->
+  <line class="ink" x1="178" y1="282" x2="178" y2="400" /><line class="ink" x1="300" y1="282" x2="300" y2="400" /><line class="ink" x1="422" y1="282" x2="422" y2="400" />
+  <!-- sign blanks -->
+  <rect class="fill-green" x="84" y="256" width="66" height="16" rx="2" />
+  <rect class="fill-ink" x="206" y="256" width="66" height="16" rx="2" />
+  <rect class="fill-ink" x="270" y="216" width="70" height="18" rx="2" />
+  <rect class="fill-ink" x="328" y="256" width="66" height="16" rx="2" />
+  <rect class="fill-green" x="450" y="256" width="66" height="16" rx="2" />
+  <!-- awnings -->
+  <path class="fill-green" d="M186,288 L292,288 L300,304 L178,304 Z" />
+  <path class="fill-green" d="M430,288 L536,288 L544,304 L422,304 Z" />
+  <!-- parking -->
+  <g>
+    <line class="stripe" x1="120" y1="474" x2="138" y2="414" /><line class="stripe" x1="190" y1="474" x2="208" y2="414" />
+    <line class="stripe" x1="260" y1="474" x2="278" y2="414" /><line class="stripe" x1="330" y1="474" x2="348" y2="414" />
+    <line class="stripe" x1="400" y1="474" x2="418" y2="414" /><line class="stripe" x1="470" y1="474" x2="488" y2="414" />
+    <line class="stripe" x1="540" y1="474" x2="558" y2="414" />
+  </g>
+  <!-- monument sign -->
+  <rect class="bld" x="28" y="384" width="62" height="76" />
+  <rect class="fill-green" x="36" y="392" width="46" height="12" />
+  <rect class="fill-ink" x="36" y="410" width="46" height="8" /><rect class="fill-ink" x="36" y="424" width="46" height="8" /><rect class="fill-ink" x="36" y="438" width="46" height="8" />
+</svg>

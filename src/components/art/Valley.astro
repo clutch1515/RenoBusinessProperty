@@ -1,0 +1,23 @@
+---
+const { label = 'Illustration of the Truckee Meadows: snow-capped Sierra peaks above a valley with a low city skyline, a highway, and the river.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <rect class="bg" width="600" height="480" />
+  <path class="ridge-far" d="M0,260 L70,214 L140,236 L230,120 L300,190 L360,160 L430,206 L520,170 L600,200 L600,360 L0,360 Z" />
+  <path class="snow" d="M230,120 L200,150 L214,148 L226,160 L240,146 L256,150 Z M360,160 L344,176 L356,174 L366,182 L378,172 Z" />
+  <path class="ridge" d="M0,304 L80,272 L160,292 L240,256 L330,286 L420,262 L510,290 L600,270 L600,360 L0,360 Z" />
+  <rect class="ground" y="350" width="600" height="130" />
+  <!-- low city strip -->
+  <g class="fill-ink" opacity="0.85">
+    <rect x="200" y="318" width="16" height="32" /><rect x="220" y="302" width="14" height="48" /><rect x="238" y="290" width="18" height="60" />
+    <rect x="260" y="310" width="14" height="40" /><rect x="278" y="296" width="16" height="54" /><rect x="298" y="322" width="22" height="28" />
+    <rect x="324" y="312" width="12" height="38" /><rect x="340" y="328" width="26" height="22" />
+  </g>
+  <rect class="fill-green" x="238" y="284" width="18" height="6" />
+  <!-- highway -->
+  <path class="ink" d="M0,392 L600,380" style="stroke-width:6" />
+  <!-- river -->
+  <path class="river-line" d="M0,430 C100,410 180,436 280,418 S460,402 600,420" />
+  <!-- sage -->
+  <g class="tree" opacity="0.8"><circle cx="60" cy="452" r="10" /><circle cx="84" cy="458" r="7" /><circle cx="470" cy="456" r="9" /><circle cx="520" cy="448" r="12" /><circle cx="546" cy="460" r="7" /></g>
+</svg>

@@ -125,3 +125,29 @@ p { margin: 0 0 1em; }
   position: absolute !important; width: 1px; height: 1px; overflow: hidden;
   clip: rect(0 0 0 0); white-space: nowrap;
 }
+
+/* ---------- Illustrations (src/components/art) ---------- */
+.art { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+.art .bg { fill: var(--granite); }
+.art .ridge-far { fill: #dbe1d6; }
+.art .ridge { fill: #c6cfc0; }
+.art .snow { fill: #ffffff; }
+.art .ground { fill: #dde2dd; }
+.art .paper { fill: #ffffff; }
+.art .bld { fill: #ffffff; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.art .bld-alt { fill: #eef1ee; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.art .glass { fill: #d3e5ec; stroke: var(--ink); stroke-width: 2; }
+.art .ink { fill: none; stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.art .thin { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; }
+.art .wall { fill: none; stroke: var(--ink); stroke-width: 7; stroke-linecap: square; }
+.art .dim { fill: none; stroke: var(--ink-soft); stroke-width: 1.5; }
+.art .dash { fill: none; stroke: var(--ink); stroke-width: 2; stroke-dasharray: 10 6; }
+.art .stripe { fill: none; stroke: #ffffff; stroke-width: 3; stroke-linecap: round; }
+.art .fill-ink { fill: var(--ink); }
+.art .fill-green { fill: var(--green); }
+.art .fill-tint { fill: var(--green-tint); }
+.art .tree { fill: var(--sage); }
+.art .trunk { stroke: #5d6b55; stroke-width: 3; }
+.art .river { fill: var(--river); opacity: 0.55; }
+.art .river-line { fill: none; stroke: var(--river); stroke-width: 7; stroke-linecap: round; opacity: 0.55; }
+.art .label { font-family: var(--sans); font-weight: 700; font-size: 13px; fill: var(--ink-soft); }

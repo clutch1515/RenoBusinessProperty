@@ -50,6 +50,26 @@ const ogImage = new URL(image, site.url).href;
       address: { '@type': 'PostalAddress', streetAddress: '6140 Plumas St., Suite 100', addressLocality: 'Reno', addressRegion: 'NV', postalCode: '89519', addressCountry: 'US' },
       areaServed: ['Reno, NV', 'Sparks, NV', 'Washoe County, NV', 'Storey County, NV'],
     })} />
+    {site.gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${site.gaId}`}></script>
+        <script is:inline define:vars={{ gaId: site.gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', gaId);
+          // Count phone, email, and newsletter clicks as GA events.
+          document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href]');
+            if (!a) return;
+            var h = a.getAttribute('href');
+            if (h.indexOf('tel:') === 0) gtag('event', 'contact_click', { method: 'phone', link_url: h });
+            else if (h.indexOf('mailto:') === 0) gtag('event', 'contact_click', { method: 'email', link_url: h.split('?')[0] });
+            else if (h.indexOf('subscribepage.io') !== -1) gtag('event', 'newsletter_click', { link_url: h });
+          });
+        </script>
+      </>
+    )}
     <slot name="head" />
   </head>
   <body>

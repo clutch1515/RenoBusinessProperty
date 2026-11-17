@@ -11,6 +11,7 @@ export const site = {
   brokerage: 'Dickson Commercial Group',
   brokerageUrl: 'https://dicksoncg.com',
   address: '6140 Plumas St., Suite 100, Reno, NV 89519',
+  gaId: 'G-B7Z8JLHR7Z', // Google Analytics 4 measurement ID
 };
 
 export const nav = [

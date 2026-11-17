@@ -1,0 +1,31 @@
+---
+const { label = 'Illustration of a downtown skyline along a river with mountains behind.' } = Astro.props;
+---
+<svg class="art" viewBox="0 0 600 480" role="img" aria-label={label} preserveAspectRatio="xMidYMax slice">
+  <defs>
+    <pattern id="sky-win" width="14" height="16" patternUnits="userSpaceOnUse">
+      <rect x="3" y="4" width="8" height="8" fill="#d3e5ec" />
+    </pattern>
+  </defs>
+  <rect class="bg" width="600" height="480" />
+  <path class="ridge-far" d="M0,250 L60,210 L118,232 L190,168 L250,214 L310,186 L370,222 L440,176 L500,214 L560,192 L600,206 L600,380 L0,380 Z" />
+  <path class="snow" d="M190,168 L172,184 L184,182 L194,190 L206,180 Z M440,176 L424,190 L436,188 L446,196 L456,186 Z" />
+  <path class="ridge" d="M0,300 L70,270 L140,290 L220,258 L300,284 L380,262 L460,286 L540,266 L600,282 L600,380 L0,380 Z" />
+  <!-- towers -->
+  <g>
+    <rect class="bld" x="60" y="250" width="60" height="130" /><rect x="66" y="258" width="48" height="118" fill="url(#sky-win)" />
+    <rect class="bld" x="130" y="196" width="54" height="184" /><rect x="136" y="204" width="42" height="172" fill="url(#sky-win)" />
+    <rect class="bld" x="196" y="140" width="70" height="240" /><rect x="202" y="148" width="58" height="228" fill="url(#sky-win)" />
+    <rect class="fill-green" x="196" y="130" width="70" height="12" />
+    <rect class="bld" x="278" y="216" width="64" height="164" /><rect x="284" y="224" width="52" height="152" fill="url(#sky-win)" />
+    <rect class="bld" x="352" y="168" width="58" height="212" /><rect x="358" y="176" width="46" height="200" fill="url(#sky-win)" />
+    <rect class="bld" x="420" y="236" width="80" height="144" /><rect x="426" y="244" width="68" height="132" fill="url(#sky-win)" />
+    <rect class="bld" x="510" y="270" width="54" height="110" /><rect x="516" y="278" width="42" height="98" fill="url(#sky-win)" />
+  </g>
+  <rect class="ground" y="380" width="600" height="100" />
+  <!-- bridge -->
+  <path class="ink" d="M0,394 L600,394" />
+  <path class="ink" d="M150,394 Q190,420 230,394 Q270,420 310,394 Q350,420 390,394" style="stroke-width:2" />
+  <!-- river -->
+  <path class="river" d="M0,414 C110,404 220,422 330,412 S500,404 600,414 L600,480 L0,480 Z" />
+</svg>
