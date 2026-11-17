@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Rows from '../components/Rows.astro';
+import Pair from '../components/Pair.astro';
+import ArticleList from '../components/ArticleList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FinePrint from '../components/FinePrint.astro';
+import { site } from '../data/site';
+import { articlesById } from '../lib/articles';
+
+const guides = await articlesById([
+  'prepare-commercial-property-value-review',
+  'what-is-a-cap-rate-commercial-real-estate',
+]);
+---
+<Base
+  title="Landlord & Owner Representation, Reno | Reno Business Property"
+  ogTitle="Sell, hold, or renew? Start with the numbers."
+  description="Guidance and landlord, leasing, and sale representation for Reno and Sparks owners of retail, flex, and office property deciding to lease, renew, sell, or hold."
+>
+  <PageHero
+    title="Sell, hold, or renew? Start with the numbers."
+    lede="A lease expiration, an unsolicited offer, or a major repair can change the plan. I help Northern Nevada owners compare the options before committing to the next move."
+    actions={[
+      { label: 'Discuss your property', href: site.phoneHref },
+      { label: 'Find your starting point', href: '#owner-decisions', quiet: true },
+    ]}
+    image="old-riverside-hotel-reno-ken-lund-cc-by-sa-2.jpg"
+    alt="Old Riverside Hotel beside the Truckee Riverwalk in downtown Reno, Nevada."
+  />
+
+  <section id="owner-decisions" class="band band--granite">
+    <div class="wrap">
+      <h2>What is in front of you?</h2>
+      <p class="lede">Choose the decision closest to yours. You do not need every answer before we talk.</p>
+      <Rows items={[
+        { q: 'Sell or keep holding?', text: 'Compare likely sale proceeds with income, capital needs, financing, and the time you want to keep owning.', href: '/insights/sell-or-hold-commercial-property/', cta: 'Compare selling and holding' },
+        { q: 'Renew or find a new tenant?', text: 'Put a renewal beside a realistic vacancy scenario, including downtime, improvements, and re-leasing costs.', href: '/insights/commercial-tenant-renewal-questions-property-owners/', cta: 'Review the renewal questions' },
+        { q: 'What will help the space compete?', text: 'Work through condition, use, pricing, and operating costs before spending money on the wrong improvements.', href: '/insights/prepare-vacant-commercial-space-to-lease/', cta: 'Prepare a space to lease' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Put the alternatives on the same page.</h2>
+      <Pair cols={[
+        { h: 'The property', text: 'Start with the rent roll, lease terms, operating expenses, and known repairs. Separate actual income from assumptions.' },
+        { h: 'The decision', text: 'Compare timing, cash requirements, and risk. Identify what still needs to be verified before choosing a direction.' },
+      ]} />
+      <p class="measure note">Retail, flex, and office properties raise different questions. Access, parking, loading, permitted use, and the cost of adapting the building belong in the comparison.</p>
+    </div>
+  </section>
+
+  <section class="band band--granite">
+    <div class="wrap">
+      <h2>Bring what you have.</h2>
+      <p class="lede measure">The property address, your question, and your timing are enough to start. These documents can make the next conversation more useful.</p>
+      <Pair cols={[
+        { h: 'Income & leases', list: ['Current rent roll', 'Leases and amendments', 'Recent operating statements', 'Upcoming notice and expiration dates'] },
+        { h: 'Condition & priorities', list: ['Known roof, HVAC, or paving work', 'Building and site plans, if available', 'Financing deadlines', 'Your goals and ownership timeline'] },
+      ]} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap guides">
+      <div>
+        <h2>Understand what is behind the number.</h2>
+        <p>How income, leases, condition, and comparable evidence shape a useful value discussion.</p>
+        <a class="strong" href="/commercial-property-values/">Explore commercial property values</a>
+      </div>
+      <ArticleList articles={guides} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="What is the next decision for your property?"
+    text="Send me the address and a few lines about what you are weighing. We can identify the information to gather and the next practical step."
+    subject="Commercial property owner question"
+  />
+  <FinePrint
+    disclaimer="A broker opinion of value is not an appraisal. Brokerage services are provided through Dickson Commercial Group. Legal, tax, lending, and other specialist questions should be reviewed with the appropriate advisers."
+    credit='Photo: <a href="https://commons.wikimedia.org/wiki/File:Old_Riverside_Hotel,_Truckee_Riverwalk,_Downtown,_Reno,_Nevada_(6320297425).jpg">Old Riverside Hotel and Truckee Riverwalk, Reno</a> by Ken Lund, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. Resized and cropped for display. Adapted image available under the same license.'
+  />
+</Base>
+
+<style>
+  .note { margin-top: 2rem; color: var(--ink-soft); }
+  .guides { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 3rem; }
+  .guides p { color: var(--ink-soft); }
+  .strong { font-family: var(--sans); font-weight: 700; }
+  @media (max-width: 62rem) { .guides { grid-template-columns: 1fr; gap: 1.5rem; } }
+</style>

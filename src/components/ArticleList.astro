@@ -1,0 +1,32 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { readingMinutes } from '../lib/reading';
+
+interface Props { articles: CollectionEntry<'insights'>[]; headingLevel?: 'h2' | 'h3' }
+const { articles, headingLevel = 'h3' } = Astro.props;
+const H = headingLevel;
+const fmt = new Intl.DateTimeFormat('en-US', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<ul class="articles">
+  {articles.map((a) => (
+    <li>
+      <H class="a-title"><a href={`/insights/${a.id}/`}>{a.data.title}</a></H>
+      <p class="a-desc">{a.data.summary ?? a.data.description}</p>
+      <p class="meta">{fmt.format(a.data.date)}, {readingMinutes(a.body)} min read</p>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .articles { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+  li { padding: 1.4rem 0 1.2rem; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 0.25rem 2.5rem; }
+  .a-title { font-size: var(--t-md); margin: 0; grid-row: span 2; }
+  .a-title a { color: var(--ink); text-decoration: none; }
+  .a-title a:hover { color: var(--green); text-decoration: underline; }
+  .a-desc { margin: 0; font-size: 1rem; line-height: 1.55; color: var(--ink-soft); }
+  .meta { margin: 0.35rem 0 0; }
+  @media (max-width: 48rem) {
+    li { grid-template-columns: 1fr; }
+    .a-title { grid-row: auto; margin-bottom: 0.35rem; }
+  }
+</style>

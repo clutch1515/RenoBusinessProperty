@@ -1,0 +1,75 @@
+---
+// Shared layout for the property-type pages (retail, flex, office).
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Checks from '../components/Checks.astro';
+import Pair from '../components/Pair.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FinePrint from '../components/FinePrint.astro';
+import { site } from '../data/site';
+
+interface Props {
+  seoTitle: string; description: string;
+  title: string; lede: string; primary?: { label: string; href: string };
+  image: string; alt: string; caption?: string;
+  checks: { h: string; text: string }[];
+  business: string; owner: string;
+  checklist: { label: string; href: string };
+  credit: string;
+}
+const p = Astro.props;
+---
+<Base title={p.seoTitle} ogTitle={p.title} description={p.description}>
+  <PageHero
+    title={p.title}
+    lede={p.lede}
+    actions={[
+      p.primary ?? { label: 'Talk through your requirements', href: site.phoneHref },
+      { label: 'See what to check', href: '#property-checks', quiet: true },
+    ]}
+    image={p.image}
+    alt={p.alt}
+    caption={p.caption}
+  />
+
+  <section id="property-checks" class="band band--granite">
+    <div class="wrap">
+      <h2>Six details worth checking.</h2>
+      <Checks items={p.checks} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Start with your side of the decision.</h2>
+      <Pair cols={[
+        { h: 'For a business', text: p.business, href: '/tenants-buyers/', cta: 'Explore tenant and buyer guidance' },
+        { h: 'For a property owner', text: p.owner, href: '/property-owners/', cta: 'Explore owner guidance' },
+      ]} />
+    </div>
+  </section>
+
+  <slot />
+
+  <section class="band band--granite checklist">
+    <div class="wrap row">
+      <h2>Get the questions on paper.</h2>
+      <a class="btn" href={p.checklist.href}>{p.checklist.label}</a>
+    </div>
+  </section>
+
+  <CtaBand
+    title="Have a space or property in mind?"
+    text="Send the address or preferred area, the intended use, your approximate size, and timing. We can work through the next step."
+  />
+  <FinePrint
+    disclaimer="Information is educational. Brokerage services are provided through Dickson Commercial Group. Confirm use, physical specifications, and approval requirements for the specific property."
+    credit={p.credit}
+  />
+</Base>
+
+<style>
+  .checklist { padding-block: clamp(2.5rem, 5vw, 3.5rem); }
+  .row { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+  .row h2 { margin: 0; }
+</style>

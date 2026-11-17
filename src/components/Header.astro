@@ -1,0 +1,126 @@
+---
+import { nav, site } from '../data/site';
+const path = Astro.url.pathname;
+const isCurrent = (href?: string) => !!href && path === href;
+const inSection = (item: (typeof nav)[number]) =>
+  isCurrent(item.href) || (item.children ?? []).some((c) => isCurrent(c.href));
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-name">Reno Business Property</span>
+    </a>
+
+    <div class="bar-end">
+    <a class="btn call-mobile" href={site.phoneHref}>Call</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+      Menu
+    </button>
+    </div>
+
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul class="nav-list">
+        {nav.map((item) => (
+          <li class:list={['nav-item', { 'has-sub': item.children, 'in-section': inSection(item) }]}>
+            {item.href ? (
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+            ) : (
+              <button type="button" class="sub-toggle" aria-expanded="false">{item.label}</button>
+            )}
+            {item.children && (
+              <ul class="sub">
+                {item.children.map((c) => (
+                  <li><a href={c.href} aria-current={isCurrent(c.href) ? 'page' : undefined}>{c.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+      <a class="btn nav-cta" href={site.phoneHref}>Call Peter</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+  const navEl = document.getElementById('site-nav');
+  toggle?.addEventListener('click', () => {
+    const open = toggle.getAttribute('aria-expanded') === 'true';
+    toggle.setAttribute('aria-expanded', String(!open));
+    navEl?.classList.toggle('is-open', !open);
+  });
+  document.querySelectorAll<HTMLButtonElement>('.sub-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!open));
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.sub-toggle[aria-expanded="true"]').forEach((b) => b.setAttribute('aria-expanded', 'false'));
+    }
+  });
+</script>
+
+<style>
+  .site-header { border-bottom: 1px solid var(--rule); background: var(--paper); position: relative; z-index: 20; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; min-height: 4.75rem; }
+
+  .brand { display: flex; align-items: center; gap: 0.65rem; text-decoration: none; color: var(--ink); }
+  .brand:hover { color: var(--ink); text-decoration: none; }
+  .brand-mark {
+    width: 2rem; height: 2rem; border-radius: 3px; background: var(--green); position: relative; flex: none;
+  }
+  /* Two crossing "highways" in the mark, echoing the map */
+  .brand-mark::before, .brand-mark::after { content: ''; position: absolute; background: #fff; }
+  .brand-mark::before { left: 0; right: 0; top: 55%; height: 3px; }
+  .brand-mark::after { top: 0; bottom: 0; left: 42%; width: 3px; }
+  .brand-name { font-family: var(--sans); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; line-height: 1; padding-top: 0.15em; }
+
+  .site-nav { display: flex; align-items: center; gap: 1.25rem; }
+  .nav-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 0; }
+  .nav-item { position: relative; }
+  .nav-item > a, .sub-toggle {
+    display: block; font-family: var(--sans); font-weight: 600; font-size: 0.95rem; white-space: nowrap;
+    color: var(--ink); text-decoration: none; padding: 0.6rem 0.7rem 0.5rem; border-radius: var(--radius);
+    background: none; border: 0; cursor: pointer; line-height: 1.3;
+  }
+  .sub-toggle::after { content: ''; display: inline-block; margin-left: 0.4em; border: 4px solid transparent; border-top-color: currentColor; transform: translateY(2px); }
+  .nav-item > a:hover, .sub-toggle:hover { background: var(--granite); color: var(--ink); }
+  .nav-item.in-section > a, .nav-item.in-section > .sub-toggle { box-shadow: inset 0 -3px 0 var(--green); border-radius: 0; }
+
+  .sub {
+    list-style: none; margin: 0; padding: 0.4rem; position: absolute; left: 0; top: 100%; min-width: 15rem;
+    background: var(--paper); border: 1px solid var(--rule); border-radius: var(--radius);
+    display: none;
+  }
+  .has-sub:hover .sub, .has-sub:focus-within .sub, .sub-toggle[aria-expanded='true'] + .sub { display: block; }
+  .sub a { display: block; padding: 0.55rem 0.7rem 0.45rem; font-family: var(--sans); font-size: 0.95rem; color: var(--ink); text-decoration: none; border-radius: 3px; }
+  .sub a:hover, .sub a[aria-current='page'] { background: var(--green-tint); color: var(--green-dark); }
+
+  .nav-cta { padding: 0.75rem 1rem 0.65rem; font-size: 0.95rem; white-space: nowrap; }
+  .menu-toggle, .call-mobile { display: none; }
+  .bar-end { display: flex; align-items: center; gap: 0.6rem; }
+
+  @media (max-width: 66rem) {
+    .call-mobile { display: inline-flex; padding: 0.6rem 0.9rem 0.5rem; font-size: 1rem; }
+    .menu-toggle {
+      display: block; font-family: var(--sans); font-weight: 700; font-size: 1rem;
+      background: none; border: 2px solid var(--ink); border-radius: var(--radius); padding: 0.55rem 0.9rem 0.45rem; color: var(--ink); cursor: pointer;
+    }
+    .site-nav {
+      display: none; position: absolute; left: 0; right: 0; top: 100%;
+      background: var(--paper); border-bottom: 1px solid var(--rule);
+      flex-direction: column; align-items: stretch; padding: 0.75rem var(--gutter) 1.5rem;
+    }
+    .site-nav.is-open { display: flex; }
+    .nav-list { flex-direction: column; }
+    .sub, .has-sub:hover .sub { display: block; position: static; border: 0; padding: 0 0 0.25rem 0.75rem; min-width: 0; }
+    .sub-toggle { pointer-events: none; color: var(--ink-soft); }
+    .sub-toggle::after { display: none; }
+    .nav-item.in-section > a, .nav-item.in-section > .sub-toggle { box-shadow: none; }
+    .nav-cta { align-self: flex-start; margin-top: 0.75rem; }
+  }
+</style>

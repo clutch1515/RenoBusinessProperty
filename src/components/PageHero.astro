@@ -1,0 +1,40 @@
+---
+import Img from './Img.astro';
+interface Action { label: string; href: string; quiet?: boolean }
+interface Props { title: string; lede: string; actions?: Action[]; image: string; alt: string; caption?: string }
+const { title, lede, actions = [], image, alt, caption } = Astro.props;
+---
+<section class="page-hero">
+  <div class="wrap grid">
+    <div class="copy">
+      <h1>{title}</h1>
+      <p class="lede">{lede}</p>
+      {actions.length > 0 && (
+        <div class="actions">
+          {actions.map((a) => <a class:list={['btn', { 'btn--quiet': a.quiet }]} href={a.href}>{a.label}</a>)}
+        </div>
+      )}
+      <p class="meta who">Peter Larsen, CCIM, Dickson Commercial Group</p>
+    </div>
+    <figure class="photo">
+      <Img name={image} alt={alt} eager class="hero-img" />
+      {caption && <figcaption class="meta">{caption}</figcaption>}
+    </figure>
+  </div>
+</section>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 6vw, 4.5rem); }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  h1 { max-width: 15ch; }
+  .lede { max-width: 34rem; }
+  .who { margin: 1.75rem 0 0; }
+  .photo { margin: 0; }
+  .photo :global(.hero-img), .photo :global(.hero-img img) { width: 100%; aspect-ratio: 5 / 4; object-fit: cover; border-radius: var(--radius); }
+  figcaption { margin-top: 0.5rem; }
+  @media (max-width: 62rem) {
+    .grid { grid-template-columns: 1fr; }
+    .photo { order: -1; }
+    .photo :global(.hero-img), .photo :global(.hero-img img) { aspect-ratio: 16 / 9; }
+  }
+</style>

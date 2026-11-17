@@ -1,0 +1,137 @@
+---
+// Schematic (not to scale) diagram of the Reno-Sparks submarkets, drawn like a
+// highway guide map. Hovering a submarket in the legend highlights it on the map.
+const zones = [
+  { id: 'downtown', name: 'MidTown & Downtown Reno', note: 'Storefront retail, restaurants, and smaller office space around the urban core.' },
+  { id: 'meadows', name: 'South Meadows', note: 'Newer office, medical, and retail along the I-580 corridor.' },
+  { id: 'sparks', name: 'Sparks & North Valleys', note: 'Flex, industrial, and neighborhood retail along I-80 and US-395.' },
+  { id: 'tric', name: 'Tahoe-Reno Industrial Center', note: 'Large-format distribution and industrial space east along I-80.' },
+];
+---
+<figure class="map">
+  <svg viewBox="0 0 560 450" role="img" aria-labelledby="map-title map-desc">
+    <title id="map-title">Schematic map of Reno and Sparks commercial submarkets</title>
+    <desc id="map-desc">
+      Interstate 80 runs east to west and US-395 / I-580 runs north to south, crossing near downtown Reno.
+      MidTown and Downtown sit at that junction along the Truckee River, South Meadows lies south on I-580,
+      Sparks lies east on I-80, the North Valleys lie north on US-395, and the Tahoe-Reno Industrial Center
+      lies farther east on I-80.
+    </desc>
+
+    <!-- Truckee River -->
+    <path class="river" d="M18,292 C70,282 110,246 160,240 S222,230 262,236 S330,246 370,240 S470,232 545,234" />
+    <text class="river-label" x="40" y="318">Truckee River</text>
+
+    <!-- Highways -->
+    <g class="roads">
+      <path class="road" d="M18,252 L58,212 L362,212" />
+      <path class="road road--far" d="M394,212 L545,212" />
+      <path class="road" d="M232,212 L232,142 L184,94 L184,18" />
+      <path class="road" d="M232,212 L232,300 L272,340 L272,440" />
+      <!-- distance break on I-80 -->
+      <path class="break" d="M368,224 L376,200 M380,224 L388,200" />
+    </g>
+
+    <!-- Route labels -->
+    <g class="route">
+      <rect x="86" y="200" width="34" height="24" rx="4" /><text x="103" y="217">80</text>
+      <rect x="440" y="200" width="34" height="24" rx="4" /><text x="457" y="217">80</text>
+      <rect x="211" y="252" width="42" height="24" rx="4" /><text x="232" y="269">580</text>
+      <rect x="211" y="158" width="42" height="24" rx="4" /><text x="232" y="175">395</text>
+    </g>
+
+    <!-- Submarkets -->
+    <g class="zone zone-downtown">
+      <circle class="halo" cx="206" cy="232" r="22" />
+      <circle class="dot" cx="206" cy="232" r="8" />
+      <text class="label" x="190" y="270" text-anchor="end">MidTown &amp;</text>
+      <text class="label" x="190" y="288" text-anchor="end">Downtown</text>
+    </g>
+    <g class="zone zone-meadows">
+      <circle class="halo" cx="272" cy="384" r="22" />
+      <circle class="dot" cx="272" cy="384" r="8" />
+      <text class="label" x="292" y="390">South Meadows</text>
+    </g>
+    <g class="zone zone-sparks">
+      <circle class="halo" cx="318" cy="212" r="22" />
+      <circle class="dot" cx="318" cy="212" r="8" />
+      <text class="label" x="318" y="186" text-anchor="middle">Sparks</text>
+      <circle class="halo" cx="184" cy="52" r="22" />
+      <circle class="dot" cx="184" cy="52" r="8" />
+      <text class="label" x="204" y="58">North Valleys</text>
+    </g>
+    <g class="zone zone-tric">
+      <circle class="halo" cx="508" cy="212" r="22" />
+      <circle class="dot" cx="508" cy="212" r="8" />
+      <text class="label" x="545" y="158" text-anchor="end">Tahoe-Reno</text>
+      <text class="label" x="545" y="176" text-anchor="end">Industrial Center</text>
+    </g>
+
+    <text class="note" x="18" y="440">Schematic, not to scale</text>
+  </svg>
+
+  <figcaption>
+    <ul class="legend">
+      {zones.map((z) => (
+        <li data-zone={z.id}>
+          <span class="key" aria-hidden="true"></span>
+          <span>
+            <strong>{z.name}</strong>
+            <span class="zone-note">{z.note}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  </figcaption>
+</figure>
+
+<style>
+  .map { margin: 0; }
+  svg { width: 100%; overflow: visible; }
+
+  .river { fill: none; stroke: var(--river); stroke-width: 7; stroke-linecap: round; opacity: 0.55; }
+  .river-label { font-family: var(--serif); font-style: italic; font-size: 14px; fill: #2f6f8a; }
+
+  .road { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linejoin: round; stroke-linecap: round; }
+  .road--far { stroke-dasharray: 2 10; }
+  .break { stroke: var(--ink); stroke-width: 2; }
+
+  .route rect { fill: var(--green); }
+  .route text { font-family: var(--sans); font-weight: 800; font-size: 14px; fill: #fff; text-anchor: middle; }
+
+  .halo { fill: var(--green); opacity: 0; transition: opacity 160ms ease; }
+  .dot { fill: #fff; stroke: var(--green); stroke-width: 4; }
+  .label { font-family: var(--sans); font-weight: 700; font-size: 15px; fill: var(--ink); }
+  .note { font-family: var(--sans); font-size: 12px; fill: var(--ink-soft); }
+
+  /* Legend hover highlights the matching submarket */
+  .map:has(li[data-zone='downtown']:hover) .zone-downtown .halo,
+  .map:has(li[data-zone='meadows']:hover) .zone-meadows .halo,
+  .map:has(li[data-zone='sparks']:hover) .zone-sparks .halo,
+  .map:has(li[data-zone='tric']:hover) .zone-tric .halo { opacity: 0.22; }
+  .map:has(li[data-zone='downtown']:hover) .zone-downtown .dot,
+  .map:has(li[data-zone='meadows']:hover) .zone-meadows .dot,
+  .map:has(li[data-zone='sparks']:hover) .zone-sparks .dot,
+  .map:has(li[data-zone='tric']:hover) .zone-tric .dot { fill: var(--green); }
+
+  .legend { list-style: none; margin: 1.25rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 1.5rem; }
+  .legend li { display: flex; gap: 0.6rem; align-items: flex-start; cursor: default; }
+  .key { flex: none; width: 0.8rem; height: 0.8rem; margin-top: 0.3rem; border-radius: 50%; border: 3px solid var(--green); background: #fff; }
+  .legend li:hover .key { background: var(--green); }
+  .legend strong { display: block; font-family: var(--sans); font-size: 0.95rem; line-height: 1.3; }
+  .zone-note { display: block; font-size: 0.9rem; line-height: 1.45; color: var(--ink-soft); }
+
+  /* One orchestrated moment: the highways draw in on load */
+  @keyframes draw { from { stroke-dashoffset: 700; } to { stroke-dashoffset: 0; } }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  .road:not(.road--far) { stroke-dasharray: 700; animation: draw 1.1s cubic-bezier(.5,0,.2,1) both; }
+  .zone, .route { animation: appear 0.4s ease 0.9s both; }
+
+  @media (max-width: 34rem) {
+    .legend { grid-template-columns: 1fr; }
+    .label { font-size: 21px; }
+    .route text { font-size: 17px; }
+    .river-label { font-size: 18px; }
+    .note { font-size: 16px; }
+  }
+</style>

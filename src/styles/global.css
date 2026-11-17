@@ -1,0 +1,127 @@
+@import '@fontsource-variable/overpass';
+@import '@fontsource-variable/source-serif-4';
+@import '@fontsource-variable/source-serif-4/wght-italic.css';
+
+/* ---------- Tokens ---------- */
+:root {
+  --ink: #1e2b30;          /* basalt slate: body text, dark bands */
+  --ink-soft: #4a585d;     /* secondary text */
+  --paper: #ffffff;
+  --granite: #edefec;      /* panels */
+  --rule: #cdd3ce;         /* hairlines, borders */
+  --sage: #7e8f72;         /* sagebrush: quiet accents */
+  --green: #0e5e4a;        /* highway guide-sign green: primary */
+  --green-dark: #0a4637;
+  --green-tint: #e3ede8;
+  --river: #3e8fb0;        /* Truckee River: map only */
+
+  --sans: 'Overpass Variable', 'Overpass', system-ui, sans-serif;
+  --serif: 'Source Serif 4 Variable', 'Source Serif 4', Georgia, serif;
+
+  /* Classic typographic scale */
+  --t-sm: 0.875rem;   /* 14 */
+  --t-base: 1.125rem; /* 18 */
+  --t-md: 1.3125rem;  /* 21 */
+  --t-lg: 1.5rem;     /* 24 */
+  --t-xl: 2.25rem;    /* 36 */
+  --t-2xl: 3rem;      /* 48 */
+  --t-3xl: 3.75rem;   /* 60 */
+
+  --wrap: 72rem;
+  --measure: 38rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --radius: 4px;
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+body {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--t-base);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  font-optical-sizing: auto;
+}
+img, svg { max-width: 100%; height: auto; display: block; }
+a { color: var(--green); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { color: var(--green-dark); text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--green); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3, h4 {
+  font-family: var(--sans);
+  font-weight: 750;
+  line-height: 1.12;
+  letter-spacing: -0.012em;
+  margin: 0 0 0.5em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(var(--t-xl), 5.2vw, var(--t-3xl)); letter-spacing: -0.02em; }
+h2 { font-size: clamp(1.75rem, 3.2vw, var(--t-xl)); }
+h3 { font-size: var(--t-md); font-weight: 700; }
+p { margin: 0 0 1em; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--ink); color: #fff; padding: 0.6rem 1rem; font-family: var(--sans);
+}
+.skip-link:focus { top: 1rem; }
+
+.wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
+.measure { max-width: var(--measure); }
+.lede { font-size: var(--t-md); line-height: 1.55; color: var(--ink-soft); }
+
+.band { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.band--granite { background: var(--granite); }
+.band--ink { background: var(--ink); color: #e9eeec; }
+.band--ink a { color: #bfe3d3; }
+.band--ink h2 { color: #fff; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--sans); font-weight: 700; font-size: 1rem; line-height: 1;
+  padding: 0.95rem 1.3rem 0.85rem;
+  border-radius: var(--radius);
+  border: 2px solid var(--green);
+  background: var(--green); color: #fff; text-decoration: none;
+}
+.btn:hover { background: var(--green-dark); border-color: var(--green-dark); color: #fff; text-decoration: none; }
+.btn--quiet { background: transparent; color: var(--green); }
+.btn--quiet:hover { background: var(--green-tint); color: var(--green-dark); }
+.band--ink .btn--quiet { color: #fff; border-color: #fff; }
+.band--ink .btn--quiet:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; }
+
+/* ---------- Prose (pages + articles) ---------- */
+.prose { max-width: var(--measure); }
+.prose h2 { font-size: var(--t-lg); margin-top: 2.2em; }
+.prose h3 { font-size: var(--t-md); margin-top: 1.8em; }
+.prose ul, .prose ol { padding-left: 1.3em; margin: 0 0 1.2em; }
+.prose li { margin-bottom: 0.4em; }
+.prose li::marker { color: var(--sage); }
+.prose blockquote {
+  margin: 1.8em 0; padding: 0.2em 0 0.2em 1.2em;
+  border-left: 3px solid var(--green); color: var(--ink-soft); font-style: italic;
+}
+.prose img { border-radius: var(--radius); margin: 1.8em 0; }
+.prose figure { margin: 1.8em 0; }
+.prose figcaption { font-family: var(--sans); font-size: var(--t-sm); color: var(--ink-soft); margin-top: 0.5em; }
+.prose table { width: 100%; border-collapse: collapse; font-size: 1rem; margin: 1.5em 0; }
+.prose th, .prose td { text-align: left; padding: 0.6em 0.75em; border-bottom: 1px solid var(--rule); vertical-align: top; }
+.prose th { font-family: var(--sans); font-weight: 700; }
+.prose hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5em 0; }
+
+/* Small sans text: meta lines, captions, credits */
+.meta { font-family: var(--sans); font-size: var(--t-sm); color: var(--ink-soft); }
+
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap;
+}

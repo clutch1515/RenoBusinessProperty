@@ -1,0 +1,17 @@
+---
+// A grid of things to check. Not numbered: these aren't a sequence.
+interface Item { h: string; text: string }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+<ul class="checks">
+  {items.map((i) => (<li><h3>{i.h}</h3><p>{i.text}</p></li>))}
+</ul>
+<style>
+  .checks { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.25rem 2.5rem; }
+  li { border-top: 6px solid var(--green); padding-top: 1rem; }
+  h3 { font-size: var(--t-md); margin-bottom: 0.4em; }
+  p { margin: 0; color: var(--ink-soft); font-size: 1rem; line-height: 1.6; }
+  @media (max-width: 62rem) { .checks { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 40rem) { .checks { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,65 @@
+---
+import TypePage from '../layouts/TypePage.astro';
+import { site } from '../data/site';
+---
+<TypePage
+  seoTitle="Reno & Sparks Office Space | Reno Business Property"
+  description="Leasing or buying office space in Reno and Sparks: location, parking, layout efficiency, building systems, medical office, subleases, and lease structure."
+  title="An office should fit how your team works."
+  lede="Looking to lease or buy office space in Reno or Sparks? Share your preferred area, team size, budget, and timing so we can narrow the search. Use the guide below to compare parking, layout, and the full cost of each option."
+  primary={{ label: 'Share your office space requirements', href: `mailto:${site.email}?subject=${encodeURIComponent('Office space requirement')}` }}
+  image="illustrative-office-exterior-czapp-arpad-pexels.jpg"
+  alt="Contemporary office exterior with stone, glass and landscaped walkways"
+  caption="Illustrative office example. Not a Reno/Sparks property or listing."
+  checks={[
+    { h: 'Location & access', text: 'Commute patterns, client access, nearby services, and how easily employees and visitors arrive from the freeways and arterials.' },
+    { h: 'Parking & arrival', text: 'Parking ratios, reserved and visitor spaces, and how the lot performs at peak hours, especially for client-facing and medical users.' },
+    { h: 'Layout & efficiency', text: 'Usable versus rentable area, the common-area load factor, window lines, column spacing, and how well the floor plan fits your team.' },
+    { h: 'Building systems', text: 'HVAC hours and after-hours costs, data and fiber, elevators, restrooms, accessibility, and security.' },
+    { h: 'Lease structure', text: 'Full-service gross versus NNN, base years, expense stops, and what is actually included in the quoted rate.' },
+    { h: 'Term & flexibility', text: 'Expansion and contraction rights, renewal options, subleasing and assignment rights, and early-termination provisions.' },
+  ]}
+  business="Compare usable layout, client and employee access, after-hours needs, and room for the team to change."
+  owner="Review layout efficiency, suite condition, accurate measurements, and operating-cost clarity when positioning office space."
+  checklist={{ label: 'Compare the full occupancy cost', href: '/insights/compare-commercial-spaces-beyond-asking-rent/' }}
+  credit='Photo: <a href="https://www.pexels.com/photo/office-building-11176809/">Office Building</a> by Czapp Árpád, <a href="https://www.pexels.com/license/">Pexels License</a>. Resized and cropped for display.'
+>
+  <section class="band">
+    <div class="wrap">
+      <h2>Which office costs less each month?</h2>
+      <p class="measure lede">
+        Illustrative lease comparison only: these are invented suites and rates, not available listings or Reno/Sparks
+        market averages. Both suites have 2,000 rentable square feet. Rates are annual amounts per rentable square foot.
+      </p>
+      <div class="table-wrap">
+        <table class="compare">
+          <thead>
+            <tr><th scope="col"></th><th scope="col">Suite A</th><th scope="col">Suite B</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Quoted rate</th><td>$24 base + $8 estimated operating expenses</td><td>$30, operating expenses included</td></tr>
+            <tr><th scope="row">Monthly rent</th><td>2,000 × $32 ÷ 12 = $5,333</td><td>$5,000</td></tr>
+            <tr><th scope="row">Six parking spaces</th><td>Included</td><td>6 × $75 = $450</td></tr>
+            <tr class="total"><th scope="row">Monthly total</th><td>$5,333</td><td>$5,450</td></tr>
+            <tr><th scope="row">Usable square feet</th><td>1,700</td><td>1,850</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="measure">
+        With six parking spaces, Suite A saves about $117 a month. If your team needs only four and Suite B lets you pay
+        for just those four, Suite B costs $5,300 and provides 150 more usable square feet. Before comparing real proposals,
+        confirm the parking commitment, expense adjustments, utilities, after-hours HVAC and build-out costs.
+      </p>
+    </div>
+  </section>
+</TypePage>
+
+<style>
+  .table-wrap { overflow-x: auto; margin: 2rem 0; }
+  .compare { border-collapse: collapse; min-width: 34rem; width: 100%; max-width: 52rem; font-size: 1rem; }
+  .compare th, .compare td { text-align: left; padding: 0.8rem 1rem 0.7rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .compare thead th { font-family: var(--sans); font-size: var(--t-md); border-bottom: 2px solid var(--ink); }
+  .compare tbody th { font-family: var(--sans); font-weight: 600; color: var(--ink-soft); width: 28%; }
+  .compare .total td, .compare .total th { font-family: var(--sans); font-weight: 800; color: var(--ink); background: var(--green-tint); }
+  .compare .total th { padding-left: 0.75rem; }
+</style>

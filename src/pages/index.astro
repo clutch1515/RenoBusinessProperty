@@ -1,0 +1,155 @@
+---
+import Base from '../layouts/Base.astro';
+import SubmarketMap from '../components/SubmarketMap.astro';
+import Rows from '../components/Rows.astro';
+import ArticleList from '../components/ArticleList.astro';
+import Newsletter from '../components/Newsletter.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Img from '../components/Img.astro';
+import { site } from '../data/site';
+import { articlesById } from '../lib/articles';
+
+const guides = await articlesById([
+  'what-is-a-cap-rate-commercial-real-estate',
+  'lease-vs-buy-commercial-space-owner-users',
+  'commercial-real-estate-letter-of-intent-explained',
+]);
+
+const paths = [
+  {
+    q: 'What should I do with my property?',
+    text: 'Compare value, holding versus selling, and lease renewals. Consider how a potential 1031 exchange fits your next purchase with your tax and exchange advisers.',
+    href: '/property-owners/',
+    cta: 'Explore owner scenarios',
+  },
+  {
+    q: 'Will this space work for my business?',
+    text: 'Check whether the space fits your operation, compare leasing with buying, and understand the full occupancy cost before committing.',
+    href: '/tenants-buyers/',
+    cta: 'Explore business-space decisions',
+  },
+  {
+    q: 'Do the numbers support the investment?',
+    text: 'Put cap rates in context, test acquisition assumptions, and weigh the cost and potential of repositioning a property.',
+    href: '/commercial-property-values/',
+    cta: 'Explore investment value scenarios',
+  },
+];
+
+const types = [
+  { name: 'Flex & warehouse', href: '/flex-warehouse-space/', text: 'Loading, power, clear height, access, and permitted use.' },
+  { name: 'Retail & storefront', href: '/retail-storefronts/', text: 'Visibility, parking, customer access, and build-out.' },
+  { name: 'Office', href: '/office-space/', text: 'Layout, parking, building systems, and lease costs.' },
+];
+---
+<Base
+  title="Reno & Sparks Commercial Real Estate | Reno Business Property"
+  ogTitle="Clear advice for your next commercial property decision"
+  description="Plain-English commercial real estate guidance for property owners, tenants, and buyers in Reno, Sparks, and Northern Nevada, from Peter Larsen, CCIM."
+>
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Clear advice for your next commercial property decision.</h1>
+        <p class="lede">
+          Buying, leasing, selling, or deciding what comes next? Peter Larsen, CCIM, helps Reno and Sparks
+          owners, businesses, and investors compare the options and understand the numbers.
+        </p>
+        <div class="actions">
+          <a class="btn" href={site.phoneHref}>Talk through your decision</a>
+          <a class="btn btn--quiet" href="#decision-paths">Choose your starting point</a>
+        </div>
+        <p class="meta who">Peter Larsen, CCIM, Dickson Commercial Group</p>
+      </div>
+      <div class="hero-map">
+        <SubmarketMap />
+      </div>
+    </div>
+  </section>
+
+  <section id="decision-paths" class="band band--granite">
+    <div class="wrap">
+      <h2>Choose your decision path</h2>
+      <p class="lede">Start with the question you need answered.</p>
+      <Rows items={paths} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Local context. Property-specific questions.</h2>
+      <p class="lede measure">The right questions change with the building, the business, and the location.</p>
+      <ul class="types">
+        {types.map((t) => (
+          <li>
+            <h3><a href={t.href}>{t.name}</a></h3>
+            <p>{t.text}</p>
+          </li>
+        ))}
+      </ul>
+      <p class="compare">
+        Weighing South Meadows against Sparks, or Downtown against the TRIC corridor?
+        <a href="/about-contact/#inquiry">Talk through a location comparison</a>
+      </p>
+    </div>
+  </section>
+
+  <figure class="skyline">
+    <Img name="reno-autumn-skyline-trevor-bexon.jpg" alt="Reno skyline and surrounding hills in autumn" sizes="100vw" class="skyline-img" />
+    <figcaption class="wrap meta">
+      Photo: <a href="https://commons.wikimedia.org/wiki/File:City_of_Reno_in_Autumn.jpg">City of Reno in Autumn</a> by Trevor Bexon,
+      <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>. Resized.
+    </figcaption>
+  </figure>
+
+  <section class="band band--granite">
+    <div class="wrap guides">
+      <div class="guides-head">
+        <h2>A useful place to start</h2>
+        <p>Plain-English guides to the numbers, costs, and terms behind a commercial property decision.</p>
+        <a href="/market-insights/">Browse all guides and market insights</a>
+      </div>
+      <ArticleList articles={guides} />
+    </div>
+  </section>
+
+  <Newsletter />
+
+  <CtaBand
+    title="Have a property question?"
+    text="Call or email Peter directly. Bring the address, the lease, or just the question."
+  />
+</Base>
+
+<style>
+  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) clamp(3rem, 7vw, 5rem); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+  .hero-copy h1 { max-width: 14ch; }
+  .hero-copy .lede { max-width: 32rem; }
+  .who { margin: 1.75rem 0 0; }
+
+  .types { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .types li { border-top: 6px solid var(--green); padding-top: 1.1rem; }
+  .types h3 { font-size: var(--t-lg); }
+  .types h3 a { color: var(--ink); text-decoration: none; }
+  .types h3 a:hover { color: var(--green); text-decoration: underline; }
+  .types p { color: var(--ink-soft); margin: 0; }
+  .compare { margin: 2.5rem 0 0; }
+  .compare a { font-family: var(--sans); font-weight: 700; margin-left: 0.25rem; }
+
+  .skyline { margin: 0; }
+  .skyline :global(.skyline-img), .skyline :global(.skyline-img img) { width: 100%; height: clamp(200px, 28vw, 420px); object-fit: cover; border-radius: 0; aspect-ratio: auto; }
+  .skyline figcaption { padding-block: 0.6rem; }
+  .skyline figcaption a { color: var(--ink-soft); }
+
+  .guides { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 3rem; }
+  .guides-head p { color: var(--ink-soft); }
+  .guides-head a { font-family: var(--sans); font-weight: 700; }
+
+  @media (max-width: 62rem) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-copy h1 { max-width: 16ch; }
+    .types { grid-template-columns: 1fr; gap: 2rem; }
+    .guides { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+</style>

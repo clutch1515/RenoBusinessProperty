@@ -1,0 +1,23 @@
+---
+// Full-width decision rows: question, explanation, link.
+interface Item { q: string; text: string; href: string; cta: string }
+interface Props { items: Item[] }
+const { items } = Astro.props;
+---
+<ul class="rows">
+  {items.map((p) => (
+    <li>
+      <h3>{p.q}</h3>
+      <p>{p.text}</p>
+      <a href={p.href}>{p.cta}</a>
+    </li>
+  ))}
+</ul>
+<style>
+  .rows { list-style: none; margin: 2rem 0 0; padding: 0; border-top: 2px solid var(--ink); }
+  li { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 0.8fr); gap: 0.5rem 2.5rem; align-items: baseline; padding: 1.6rem 0; border-bottom: 1px solid var(--rule); }
+  h3 { font-size: var(--t-lg); margin: 0; }
+  p { margin: 0; color: var(--ink-soft); }
+  a { font-family: var(--sans); font-weight: 700; justify-self: end; text-align: right; }
+  @media (max-width: 62rem) { li { grid-template-columns: 1fr; } a { justify-self: start; text-align: left; } }
+</style>

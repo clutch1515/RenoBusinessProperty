@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import FinePrint from '../components/FinePrint.astro';
+import { site } from '../data/site';
+const mail = `mailto:${site.email}?subject=${encodeURIComponent('Reno Business Property inquiry')}`;
+---
+<Base
+  title="About Peter Larsen, CCIM | Reno Business Property"
+  ogTitle="Bring the question. We’ll work through it."
+  description="Peter Larsen, CCIM, is an associate with Dickson Commercial Group working with commercial property owners, tenants, and buyers in Reno and Northern Nevada."
+>
+  <PageHero
+    title="Bring the question. We’ll work through it."
+    lede="A property, a lease, or a possible move. Start with what you know and the decision you are trying to make."
+    actions={[
+      { label: `Call ${site.phone}`, href: site.phoneHref },
+      { label: 'Email Peter', href: mail, quiet: true },
+    ]}
+    image="farmers-bank-carson-valley-minden-asilvero-cc-by-sa-3.jpg"
+    alt="Historic Farmers Bank of Carson Valley building in Minden, Nevada."
+  />
+
+  <section class="band band--granite">
+    <div class="wrap about">
+      <div class="bio">
+        <h2>Peter Larsen, CCIM</h2>
+        <p class="meta creds">{site.title}, {site.brokerage}<br />Nevada Real Estate License S.195204</p>
+        <p>Peter’s interest in commercial real estate began in 2014 while purchasing a personal investment. Since then, he has continued to build his experience while working with commercial property owners, tenants, and buyers across Northern Nevada.</p>
+        <p>The purpose of this site is straightforward: help people understand commercial property decisions before they are asked to make them.</p>
+        <p><a class="strong" href="https://dicksoncg.com/team-members/peter-larsen/">View Peter’s DCG profile</a></p>
+      </div>
+
+      <div id="inquiry" class="direct">
+        <h2>Reach Peter directly</h2>
+        <dl>
+          <dt>Phone</dt>
+          <dd><a href={site.phoneHref}>{site.phone}</a></dd>
+          <dt>Email</dt>
+          <dd><a href={mail}>{site.email}</a></dd>
+          <dt>Office</dt>
+          <dd>{site.address}</dd>
+        </dl>
+        <p class="hint">A few useful details: the address or area, what you own or need, your timing, and the question in front of you.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap measure">
+      <h2>About Dickson Commercial Group</h2>
+      <p>Dickson Commercial Group is a full-service commercial real estate firm serving Northern Nevada. Learn more about the brokerage, its services, and its professionals at <a href={site.brokerageUrl}>DicksonCG.com</a>.</p>
+      <p class="meta">Looking for the monthly market notes? <a href="/market-insights/#monthly-updates">Sign up on the Market Insights page</a>.</p>
+    </div>
+  </section>
+
+  <FinePrint
+    disclaimer="Information on this website is educational and is not legal, tax, appraisal, engineering, environmental, or zoning advice. Brokerage services are provided through Dickson Commercial Group."
+    credit='Photo: <a href="https://commons.wikimedia.org/wiki/File:Farmers_Bank_Of_Carson_Valley.jpg">Farmers Bank of Carson Valley, Minden</a> by Asilvero, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>. Resized and cropped for responsive display; adapted image shared under the same license.'
+  />
+</Base>
+
+<style>
+  .about { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: start; }
+  .bio p { max-width: var(--measure); }
+  .creds { margin-bottom: 1.5rem; }
+  .strong { font-family: var(--sans); font-weight: 700; }
+  .direct { background: var(--paper); border-top: 6px solid var(--green); padding: 1.75rem; scroll-margin-top: 2rem; }
+  .direct h2 { font-size: var(--t-lg); }
+  dl { margin: 0 0 1.25rem; display: grid; grid-template-columns: auto 1fr; gap: 0.6rem 1.25rem; }
+  dt { font-family: var(--sans); font-weight: 700; font-size: var(--t-sm); color: var(--ink-soft); padding-top: 0.2rem; }
+  dd { margin: 0; }
+  dd a { font-family: var(--sans); font-weight: 700; font-size: var(--t-md); word-break: break-word; }
+  .hint { color: var(--ink-soft); font-size: 1rem; margin: 0; }
+  @media (max-width: 62rem) { .about { grid-template-columns: 1fr; } }
+</style>

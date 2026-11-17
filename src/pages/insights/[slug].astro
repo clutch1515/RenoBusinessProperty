@@ -1,0 +1,91 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { allArticles, type Article } from '../../lib/articles';
+import { readingMinutes } from '../../lib/reading';
+import { topics, site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const list = await allArticles();
+  return list.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+const { entry } = Astro.props as { entry: Article };
+const { Content } = await render(entry);
+const d = entry.data;
+const fmt = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' });
+const topicLinks = topics.filter((t) => d.topics.includes(t.id));
+---
+<Base
+  title={d.seoTitle ? `${d.seoTitle}${d.seoTitle.includes('|') ? '' : ' | Reno Business Property'}` : `${d.title} | Reno Business Property`}
+  ogTitle={d.title}
+  description={d.description}
+  type="article"
+  published={d.date}
+  noindex={d.draft}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: d.title,
+    description: d.description,
+    datePublished: d.date.toISOString(),
+    dateModified: (d.updated ?? d.date).toISOString(),
+    author: { '@type': 'Person', name: 'Peter Larsen, CCIM' },
+    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+    mainEntityOfPage: new URL(`/insights/${entry.id}/`, site.url).href,
+  })} />
+
+  <article class="wrap article">
+    <header class="head">
+      <p class="meta crumbs">
+        <a href="/market-insights/">Market insights</a>
+        {topicLinks.map((t) => (<><span aria-hidden="true"> / </span><a href={`/market-insights/#${t.id}`}>{t.label}</a></>))}
+      </p>
+      <h1>{d.title}</h1>
+      {d.summary && <p class="lede">{d.summary}</p>}
+      <p class="meta byline">
+        By Peter Larsen, CCIM. <time datetime={d.date.toISOString()}>{fmt.format(d.date)}</time>.{' '}
+        {readingMinutes(entry.body)} min read.
+        {d.draft && <strong> Draft, not published.</strong>}
+      </p>
+    </header>
+
+    <div class="body">
+      <div class="prose">
+        <Content />
+      </div>
+      <aside class="side" aria-label="Contact Peter">
+        <p class="side-head">Working through this for a real property?</p>
+        <p>Peter Larsen, CCIM, works with Reno and Sparks owners, tenants, and buyers.</p>
+        <a class="btn" href={site.phoneHref}>Call {site.phone}</a>
+        <a class="mail" href={`mailto:${site.email}?subject=${encodeURIComponent('Question about: ' + d.title)}`}>Email Peter</a>
+      </aside>
+    </div>
+  </article>
+
+  <CtaBand
+    title="Have a question about your property?"
+    text="Bring the address, the lease, or just the question. A short conversation can sort out what matters for your situation."
+    subject={`Question about: ${d.title}`}
+  />
+</Base>
+
+<style>
+  .article { padding-block: clamp(2.5rem, 6vw, 4rem); }
+  .head { max-width: 48rem; margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 2px solid var(--ink); }
+  .head h1 { font-size: clamp(2rem, 4.4vw, var(--t-2xl)); }
+  .crumbs { margin-bottom: 1rem; }
+  .byline { margin: 1rem 0 0; }
+  .body { display: grid; grid-template-columns: minmax(0, var(--measure)) minmax(0, 17rem); gap: clamp(2rem, 6vw, 5rem); align-items: start; }
+  .side { position: sticky; top: 2rem; border-top: 6px solid var(--green); background: var(--granite); padding: 1.4rem 1.4rem 1.5rem; font-size: 1rem; }
+  .side-head { font-family: var(--sans); font-weight: 750; font-size: var(--t-md); line-height: 1.25; }
+  .side p { color: var(--ink-soft); }
+  .side-head { color: var(--ink) !important; }
+  .side .btn { width: 100%; justify-content: center; }
+  .mail { display: block; margin-top: 0.9rem; text-align: center; font-family: var(--sans); font-weight: 700; }
+  @media (max-width: 62rem) {
+    .body { grid-template-columns: 1fr; }
+    .side { position: static; max-width: var(--measure); }
+  }
+</style>

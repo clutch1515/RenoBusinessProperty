@@ -1,0 +1,30 @@
+---
+// Looks up an image in src/assets/images by file name and outputs an optimized,
+// responsive <picture>. If the file isn't there yet, shows a neutral placeholder
+// so the build never breaks while media is still being added.
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props { name: string; alt: string; sizes?: string; class?: string; eager?: boolean }
+const { name, alt, sizes = '(min-width: 62rem) 50vw, 100vw', class: cls, eager = false } = Astro.props;
+const files = import.meta.glob<{ default: ImageMetadata }>('../assets/images/*.{jpg,jpeg,png,webp,avif}');
+const key = Object.keys(files).find((k) => k.endsWith('/' + name));
+const img = key ? (await files[key]()).default : null;
+---
+{img ? (
+  <Picture
+    src={img}
+    alt={alt}
+    formats={['avif', 'webp']}
+    widths={[480, 800, 1200, 1600].filter((w) => w <= img.width)}
+    sizes={sizes}
+    class={cls}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+  />
+) : (
+  <div class:list={['img-missing', cls]} role="img" aria-label={alt}><span>{name}</span></div>
+)}
+<style>
+  .img-missing { aspect-ratio: 4 / 3; background: var(--granite); display: grid; place-items: center; color: var(--ink-soft); font-family: var(--sans); font-size: 0.8rem; border-radius: var(--radius); }
+</style>

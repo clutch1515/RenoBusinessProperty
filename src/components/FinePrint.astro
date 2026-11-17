@@ -1,0 +1,14 @@
+---
+// Disclaimer and photo credits at the foot of a page. `credit` may contain links.
+interface Props { disclaimer?: string; credit?: string }
+const { disclaimer, credit } = Astro.props;
+---
+<aside class="wrap fine">
+  {disclaimer && <p>{disclaimer}</p>}
+  {credit && <p set:html={credit} />}
+</aside>
+<style>
+  .fine { padding-block: 1.75rem; font-family: var(--sans); font-size: var(--t-sm); color: var(--ink-soft); }
+  .fine p { max-width: 52rem; margin: 0 0 0.5rem; }
+  .fine :global(a) { color: var(--ink-soft); }
+</style>

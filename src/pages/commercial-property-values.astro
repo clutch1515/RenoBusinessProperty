@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Checks from '../components/Checks.astro';
+import Pair from '../components/Pair.astro';
+import Faq from '../components/Faq.astro';
+import ArticleList from '../components/ArticleList.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FinePrint from '../components/FinePrint.astro';
+import { site } from '../data/site';
+import { allArticles } from '../lib/articles';
+
+const guides = (await allArticles()).filter((a) => a.data.topics.includes('ownership')).slice(0, 4);
+
+const factors = [
+  { h: 'Leases and income', text: 'Remaining term, rent compared with market, scheduled increases, options, and who pays which expenses.', href: '/insights/what-does-nnn-mean-commercial-lease/', cta: 'Understand NNN leases' },
+  { h: 'Tenant quality and occupancy', text: 'Payment history, business stability, and how much of the property is leased, or could realistically be leased.', href: '/insights/commercial-tenant-renewal-questions-property-owners/', cta: 'Evaluating a renewal' },
+  { h: 'Condition and capital needs', text: 'Roof, HVAC, paving, and other systems, plus any deferred maintenance a buyer would need to fund.' },
+  { h: 'Use and zoning', text: 'What the property can legally be used for today, and whether those uses match current demand.', href: '/insights/verify-business-use-zoning-reno/', cta: 'Why permitted use matters' },
+  { h: 'Location and access', text: 'Visibility, access, parking, loading, and proximity to the corridors and customers the property depends on.' },
+  { h: 'Market evidence', text: 'Verified sales and leasing activity for truly comparable properties, and how current that evidence is.' },
+];
+---
+<Base
+  title="Reno Commercial Property Values | Reno Business Property"
+  ogTitle="Understand commercial property values in Reno and Sparks."
+  description="How commercial property value is set in Reno and Sparks: income, leases, condition, use, and market evidence, plus how cap rates and comparable sales work."
+>
+  <PageHero
+    title="Understand commercial property values in Reno and Sparks."
+    lede="A credible opinion of value connects income, condition, location, use, and market evidence, and explains the reasoning behind the number."
+    actions={[
+      { label: `Call ${site.phone}`, href: site.phoneHref },
+      { label: 'Talk with Peter', href: '/about-contact/', quiet: true },
+    ]}
+    image="reno-commercial-hero-v1.png"
+    alt="Illustrative panoramic view of a Northern Nevada commercial district with Sierra foothills."
+    caption="Illustrative image."
+  />
+
+  <section class="band band--granite">
+    <div class="wrap two">
+      <h2>Commercial value is an explanation, not just a number.</h2>
+      <div>
+        <p>Unlike many homes, most commercial properties are valued largely on what they produce and what a buyer could do with them. Two buildings of the same size on the same street can be worth very different amounts because of their leases, tenants, condition, or permitted uses.</p>
+        <p>That is why a useful value discussion always asks why. Which evidence supports the conclusion, which assumptions matter most, and what could change the answer?</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>How value is typically approached.</h2>
+      <ul class="approaches">
+        <li><h3>Income approach</h3><p>Relates the property's stabilized net operating income to the return a buyer would require, adjusted for lease terms, tenant quality, and risk. Usually central for leased investment property.</p></li>
+        <li><h3>Sales comparison</h3><p>Compares recent verified sales of similar properties, adjusting for size, condition, location, leases, and the circumstances of each sale. Often central for owner-user buildings.</p></li>
+        <li><h3>Cost and replacement</h3><p>Considers land value plus the cost to replace the improvements, less depreciation. Most useful for newer or specialized buildings with few true comparables.</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band band--granite">
+    <div class="wrap">
+      <h2>Factors that often matter most.</h2>
+      <ul class="factors">
+        {factors.map((f) => (
+          <li>
+            <h3>{f.h}</h3>
+            <p>{f.text}</p>
+            {f.href && <a href={f.href}>{f.cta}</a>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>What makes a value review more reliable.</h2>
+      <p class="lede measure">Better information produces a better-supported opinion. Start with what you have.</p>
+      <Pair cols={[
+        { h: 'Property records', list: ['Rent roll and lease documents, including amendments', 'Operating statements and property tax bills', 'Building and site details, with plans if available'] },
+        { h: 'Condition and context', list: ['Deferred maintenance and planned capital work', 'Zoning, access, parking, loading, and utilities', 'The purpose and timing of the valuation'] },
+      ]} />
+      <p class="measure note">Verified comparable sales and leasing activity are part of the analysis. Restricted third-party data is used only as its license allows and is not republished.</p>
+      <div class="callout measure">
+        <h3>Educational, not an appraisal</h3>
+        <p>A broker opinion of value (BOV) supports pricing, leasing, and strategy discussions, but it is not an appraisal. Formal appraisal, legal, tax, engineering, environmental, and zoning advice should come from the appropriate qualified professionals.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band--granite">
+    <div class="wrap">
+      <h2>Questions owners and occupants ask first</h2>
+      <Faq items={[
+        { q: 'Why do online estimates miss for commercial property?', a: 'Automated estimates rarely see leases, income, expenses, condition, or permitted use, which often drive commercial value. They can be a starting point but should not anchor a decision.' },
+        { q: 'What is a cap rate, in plain English?', a: 'A capitalization rate expresses a property\'s net operating income as a percentage of its value or price. It reflects the return a buyer expects for the income and risk involved. Comparing cap rates only makes sense between genuinely similar properties. <a href="/insights/what-is-a-cap-rate-commercial-real-estate/">Read the full cap rate guide</a>.' },
+        { q: 'How often should I revisit my property\'s value?', a: 'Whenever a major decision is approaching, such as a lease expiration, refinance, sale, partnership change, or large capital project, and periodically as market conditions change.' },
+        { q: 'Can improvements increase value?', a: 'Some can, especially those that help leasing or reduce a buyer\'s capital needs. Others cost more than they return. A value review can help identify which is which before you spend.' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap guides">
+      <div>
+        <h2>Guides on value and ownership</h2>
+        <a class="strong" href="/market-insights/">Browse all market insights</a>
+      </div>
+      <ArticleList articles={guides} />
+    </div>
+  </section>
+
+  <CtaBand
+    title="Talk with Peter."
+    text="Share the property, its leases, and your timing. We will explain the reasoning, the likely range, and what could improve the outcome."
+    subject="Commercial property value question"
+  />
+  <FinePrint
+    disclaimer="Information on this page is educational and is not legal, tax, appraisal, engineering, environmental, or zoning advice. Brokerage services are provided through Dickson Commercial Group."
+    credit="Image: illustrative rendering, not a specific property."
+  />
+</Base>
+
+<style>
+  .two { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 3rem; }
+  .two p { max-width: var(--measure); }
+  .approaches { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .approaches li { border-top: 6px solid var(--green); padding-top: 1rem; }
+  .approaches h3 { font-size: var(--t-lg); }
+  .approaches p, .factors p { color: var(--ink-soft); margin: 0; }
+  .factors { list-style: none; margin: 2rem 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 2px solid var(--ink); }
+  .factors li { padding: 1.4rem 1.5rem 1.6rem 0; border-bottom: 1px solid var(--rule); }
+  .factors li:not(:nth-child(3n + 1)) { padding-left: 1.5rem; border-left: 1px solid var(--rule); }
+  .factors a { display: inline-block; margin-top: 0.6rem; font-family: var(--sans); font-weight: 700; font-size: 1rem; }
+  .note { margin-top: 2rem; color: var(--ink-soft); }
+  .callout { margin-top: 2rem; padding: 1.5rem 1.75rem; border-left: 6px solid var(--green); background: var(--green-tint); }
+  .callout p { margin: 0; }
+  .guides { display: grid; grid-template-columns: minmax(0, 20rem) minmax(0, 1fr); gap: 3rem; }
+  .strong { font-family: var(--sans); font-weight: 700; }
+  @media (max-width: 62rem) {
+    .two, .guides { grid-template-columns: 1fr; gap: 1.5rem; }
+    .approaches, .factors { grid-template-columns: 1fr; gap: 0; }
+    .approaches { gap: 2rem; }
+    .factors li:not(:nth-child(3n + 1)) { padding-left: 0; border-left: 0; }
+  }
+</style>

@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title: string;        // full <title>, e.g. "Office Space | Reno Business Property"
+  ogTitle?: string;     // shorter title for social shares
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  published?: Date;
+  noindex?: boolean;
+}
+const { title, ogTitle, description, image = '/og-default.png', type = 'website', published, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={ogTitle ?? title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {published && <meta property="article:published_time" content={published.toISOString()} />}
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'RealEstateAgent',
+      name: site.name,
+      url: site.url,
+      telephone: '+1-775-762-5179',
+      email: site.email,
+      employee: { '@type': 'Person', name: 'Peter Larsen', jobTitle: 'Commercial Real Estate Associate, CCIM' },
+      parentOrganization: { '@type': 'Organization', name: site.brokerage, url: site.brokerageUrl },
+      address: { '@type': 'PostalAddress', streetAddress: '6140 Plumas St., Suite 100', addressLocality: 'Reno', addressRegion: 'NV', postalCode: '89519', addressCountry: 'US' },
+      areaServed: ['Reno, NV', 'Sparks, NV', 'Washoe County, NV', 'Storey County, NV'],
+    })} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

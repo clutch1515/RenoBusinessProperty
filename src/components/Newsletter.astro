@@ -1,0 +1,27 @@
+---
+// MailerLite signup. Replace MAILERLITE_FORM_URL with the hosted form link
+// (or swap the link for MailerLite's embed code) once Peter sends it.
+const MAILERLITE_FORM_URL = '';
+---
+<section id="monthly-updates" class="band newsletter">
+  <div class="wrap nl">
+    <div>
+      <h2>Monthly market notes</h2>
+      <p class="measure">
+        One email a month on Reno and Sparks commercial real estate: what moved, what it means for owners
+        and tenants, and the newest guides. Unsubscribe any time.
+      </p>
+    </div>
+    <div class="nl-action">
+      {MAILERLITE_FORM_URL
+        ? <a class="btn" href={MAILERLITE_FORM_URL}>Sign up for market notes</a>
+        : <p class="meta">Signup form coming soon.</p>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter { border-top: 1px solid var(--rule); }
+  .nl { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 2rem; align-items: center; }
+  @media (max-width: 48rem) { .nl { grid-template-columns: 1fr; } }
+</style>

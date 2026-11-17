@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Rows from '../components/Rows.astro';
+import Pair from '../components/Pair.astro';
+import CtaBand from '../components/CtaBand.astro';
+import FinePrint from '../components/FinePrint.astro';
+---
+<Base
+  title="Tenant Representation in Reno & Sparks | Reno Business Property"
+  ogTitle="Find space that fits the way you work."
+  description="Tenant and buyer representation in Reno and Sparks: define requirements, compare total cost, verify zoning, and negotiate for retail, flex, or office space."
+>
+  <PageHero
+    title="Find space that fits the way you work."
+    lede="Before you sign a lease or buy a building, compare the fit, the full cost, and the timing. I help Reno and Sparks businesses work through the questions that matter."
+    actions={[
+      { label: 'Share your space requirements', href: '#space-requirements' },
+      { label: 'Compare your options', href: '#occupancy-options', quiet: true },
+    ]}
+    image="carson-street-view-chanilim714-cc-by-sa-3.jpg"
+    alt="Street-level commercial view along Carson Street in Carson City, Nevada."
+  />
+
+  <section id="occupancy-options" class="band band--granite">
+    <div class="wrap">
+      <h2>What are you deciding?</h2>
+      <p class="lede">Start with the business need, then evaluate the real estate.</p>
+      <Rows items={[
+        { q: 'Lease or buy?', text: 'Compare cash requirements, flexibility, maintenance, and your expected time in the building.', href: '/insights/lease-vs-buy-commercial-space-owner-users/', cta: 'Compare leasing and buying' },
+        { q: 'Which space actually costs less?', text: 'Include operating expenses, improvements, utilities, and move-in costs alongside base rent.', href: '/insights/compare-commercial-spaces-beyond-asking-rent/', cta: 'Look beyond asking rent' },
+        { q: 'Can my business operate here?', text: 'Verify permitted use, parking, access, loading, and building systems before relying on the floor plan.', href: '/insights/verify-business-use-zoning-reno/', cta: 'Check the intended use' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <h2>Build the requirement before the tour.</h2>
+      <Pair cols={[
+        { h: 'The operation', list: ['Intended use and hours', 'Size and layout', 'Parking, loading, power, and signage', 'Customer and employee access'] },
+        { h: 'The plan', list: ['Preferred locations', 'Total occupancy budget', 'Improvement needs', 'Move date and current lease deadlines'] },
+      ]} />
+      <p class="measure note">A retail storefront, flex space, and office suite solve different problems. A written requirement makes the tradeoffs easier to see.</p>
+    </div>
+  </section>
+
+  <section class="band band--granite">
+    <div class="wrap">
+      <h2>Useful checks before you commit.</h2>
+      <Rows items={[
+        { q: 'Will the location serve your customers?', text: 'Review visibility, access, parking, and build-out alongside the rent.', href: '/insights/retail-site-selection-checklist-reno-sparks/', cta: 'Use the retail checklist' },
+        { q: 'Does the building fit the operation?', text: 'Define loading, office ratio, storage, power, and permitted use before touring.', href: '/insights/warehouse-flex-space-requirements-checklist/', cta: 'Build your flex requirements' },
+        { q: 'What belongs in the LOI?', text: 'Set out the terms that could change the decision before the final documents are drafted.', href: '/insights/commercial-real-estate-letter-of-intent-explained/', cta: 'Understand the commercial LOI' },
+      ]} />
+    </div>
+  </section>
+
+  <CtaBand
+    id="space-requirements"
+    title="Tell me what your business needs."
+    text="A rough idea is enough to start. Send your business and intended use, preferred area, approximate size, timing, and any parking, loading, or power needs you know."
+    subject="Space requirement"
+  />
+  <FinePrint
+    disclaimer="Brokerage services are provided through Dickson Commercial Group. Information here is educational; legal, tax, financing, and use approvals should be reviewed with the appropriate advisers."
+    credit='Photo: <a href="https://commons.wikimedia.org/wiki/File:Carson_Street_View_at_Carson_City_NV_-_panoramio.jpg">Carson Street View</a> by Chanilim714, <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>. Resized and cropped for responsive display; adapted image shared under the same license.'
+  />
+</Base>
+
+<style>
+  .note { margin-top: 2rem; color: var(--ink-soft); }
+</style>

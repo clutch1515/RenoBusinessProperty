@@ -1,0 +1,67 @@
+---
+import { site } from '../data/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap grid">
+    <div class="who">
+      <p class="name">Reno Business Property</p>
+      <p>Commercial real estate guidance for Reno and Sparks property owners, business owners, and investors.</p>
+      <p class="agent">
+        {site.agent}, {site.title}<br />
+        {site.license}
+      </p>
+    </div>
+
+    <div>
+      <h2 class="col-head">Reach Peter</h2>
+      <p>
+        <a href={site.phoneHref}>{site.phone}</a><br />
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>{site.address}</p>
+    </div>
+
+    <nav aria-label="Footer">
+      <h2 class="col-head">Pages</h2>
+      <ul>
+        <li><a href="/property-owners/">Property owners</a></li>
+        <li><a href="/tenants-buyers/">Tenants & buyers</a></li>
+        <li><a href="/market-insights/">Market insights</a></li>
+        <li><a href="/about-contact/">About & contact</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="wrap legal">
+    <p>
+      Peter Larsen is a licensed associate with <a href={site.brokerageUrl}>{site.brokerage}</a>.
+      Content on this site is general information, not legal, tax, or appraisal advice.
+    </p>
+    <p>
+      <a href="/privacy-policy/">Privacy policy</a>
+      <span class="sep" aria-hidden="true">|</span>
+      © {year} Reno Business Property
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--ink); color: #d5dedb; padding: 3.5rem 0 2rem; font-size: 1rem; }
+  .site-footer a { color: #fff; }
+  .site-footer a:hover { color: #bfe3d3; }
+  .grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 2.5rem; }
+  .name { font-family: var(--sans); font-weight: 800; font-size: 1.2rem; color: #fff; margin-bottom: 0.5rem; }
+  .agent { font-family: var(--sans); font-size: var(--t-sm); color: #aebbb7; }
+  .col-head { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin-bottom: 0.35rem; }
+  .legal {
+    margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.15);
+    display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap;
+    font-family: var(--sans); font-size: var(--t-sm); color: #aebbb7;
+  }
+  .legal p { margin: 0; max-width: 44rem; }
+  .sep { margin-inline: 0.5rem; }
+  @media (max-width: 48rem) { .grid { grid-template-columns: 1fr; gap: 1.75rem; } }
+</style>

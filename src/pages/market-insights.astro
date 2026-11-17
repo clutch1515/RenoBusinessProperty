@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import ArticleList from '../components/ArticleList.astro';
+import Pair from '../components/Pair.astro';
+import Newsletter from '../components/Newsletter.astro';
+import FinePrint from '../components/FinePrint.astro';
+import { allArticles } from '../lib/articles';
+import { topics } from '../data/site';
+
+const all = await allArticles();
+const latest = all.slice(0, 6);
+const sections = topics
+  .filter((t) => t.id !== 'market-updates')
+  .map((t) => ({ ...t, articles: all.filter((a) => a.data.topics.includes(t.id)) }))
+  .filter((s) => s.articles.length > 0);
+---
+<Base
+  title="Reno Commercial Real Estate Insights | Reno Business Property"
+  ogTitle="Make sense of the market. Make a better decision."
+  description="Commercial real estate market updates and practical guides for Reno, Sparks, and Northern Nevada property owners, tenants, and buyers."
+>
+  <PageHero
+    title="Make sense of the market. Make a better decision."
+    lede="Practical guides to commercial property, leases, and the numbers behind them. Start with the question you are trying to answer."
+    actions={[
+      { label: 'Browse practical guides', href: '#guide-library' },
+      { label: 'Get monthly market notes', href: '#monthly-updates', quiet: true },
+    ]}
+    image="truckee-river-downtown-reno-ken-lund-cc-by-sa-2.jpg"
+    alt="Truckee River corridor and downtown Reno viewed from above."
+  />
+
+  <section class="band band--granite">
+    <div class="wrap split">
+      <h2>The latest from RBP</h2>
+      <ArticleList articles={latest} />
+    </div>
+  </section>
+
+  <section id="guide-library" class="band">
+    <div class="wrap">
+      <h2>Find the guide that fits your question.</h2>
+      {sections.map((s) => (
+        <div class="split topic" id={s.id}>
+          <div>
+            <h3>{s.label}</h3>
+            <p>{s.blurb}</p>
+          </div>
+          <ArticleList articles={s.articles} />
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="band band--granite">
+    <div class="wrap">
+      <h2>Understand the number before using it.</h2>
+      <p class="lede measure">Market updates should state the source, date, geography, and property type. The explanation should make clear what the evidence shows and where judgment begins.</p>
+      <Pair cols={[
+        { h: 'What the data says', text: 'Reported figures, their definitions, and links to the original sources.' },
+        { h: 'What it could mean', text: 'Possible implications for owners and businesses, with assumptions and uncertainty made clear.' },
+      ]} />
+    </div>
+  </section>
+
+  <Newsletter />
+
+  <section class="band band--ink">
+    <div class="wrap">
+      <p class="ask">Have an active property or lease question? <a href="/about-contact/#inquiry">Talk with Peter</a></p>
+    </div>
+  </section>
+
+  <FinePrint
+    credit='Photo: <a href="https://commons.wikimedia.org/wiki/File:Truckee_River_and_Downtown_Reno,_Nevada_(51126751236).jpg">Truckee River and Downtown Reno</a> by Ken Lund, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>. Resized and cropped for responsive display; adapted image shared under the same license.'
+  />
+</Base>
+
+<style>
+  .split { display: grid; grid-template-columns: minmax(0, 18rem) minmax(0, 1fr); gap: 3rem; }
+  .topic { margin-top: 3rem; }
+  .topic h3 { font-size: var(--t-lg); }
+  .topic p { color: var(--ink-soft); }
+  .ask { font-family: var(--sans); font-size: var(--t-md); margin: 0; }
+  .ask a { font-weight: 700; margin-left: 0.25rem; }
+  @media (max-width: 62rem) { .split { grid-template-columns: 1fr; gap: 1rem; } }
+</style>
